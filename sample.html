@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Council Elections</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #3498db, #1a5276);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        h3 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+
+        .instructions {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .candidates {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .candidate-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .candidate-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .candidate-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .candidate-info {
+            padding: 20px;
+        }
+
+        .voting-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .position {
+            margin-bottom: 30px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .radio-option:hover {
+            background-color: #e9ecef;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        button:hover {
+            background-color: #1a5276;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .timer {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .candidates {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Westfield High School</h1>
+            <p>Student Council Elections 2025-2026</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="instructions">
+            <h2>Election Information</h2>
+            <p>Welcome to the Student Council Elections for the 2025-2026 academic year. Please review the candidates carefully and cast your vote for each position. You may vote for one candidate per position.</p>
+            
+            <div class="timer" id="timer">
+                Time remaining: <span id="time">10:00</span>
+            </div>
+        </div>
+
+        <h2>Meet the Candidates</h2>
+        <div class="candidates">
+            <!-- President Candidates -->
+            <div class="candidate-card">
+                <img class="candidate-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1000" alt="Emma Wilson">
+                <div class="candidate-info">
+                    <h3>Emma Wilson</h3>
+                    <p><strong>Running for:</strong> President</p>
+                    <p>Junior, Honor Roll Student, Debate Team Captain</p>
+                    <p>"I want to create more opportunities for student engagement and improve our school facilities."</p>
+                </div>
+            </div>
+
+            <div class="candidate-card">
+                <img class="candidate-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1000" alt="James Rodriguez">
+                <div class="candidate-info">
+                    <h3>James Rodriguez</h3>
+                    <p><strong>Running for:</strong> President</p>
+                    <p>Senior, Student Athlete, Volunteer Coordinator</p>
+                    <p>"I believe in building a stronger sense of community and addressing student concerns."</p>
+                </div>
+            </div>
+
+            <!-- Vice President Candidates -->
+            <div class="candidate-card">
+                <img class="candidate-img" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=1000" alt="Sarah Chen">
+                <div class="candidate-info">
+                    <h3>Sarah Chen</h3>
+                    <p><strong>Running for:</strong> Vice President</p>
+                    <p>Junior, Math Club President, Peer Mentor</p>
+                    <p>"I want to bridge the gap between administration and students to create positive changes."</p>
+                </div>
+            </div>
+
+            <div class="candidate-card">
+                <img class="candidate-img" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1000" alt="David Thompson">
+                <div class="candidate-info">
+                    <h3>David Thompson</h3>
+                    <p><strong>Running for:</strong> Vice President</p>
+                    <p>Senior, Drama Club Lead, Student Ambassador</p>
+                    <p>"I'm passionate about making our school a more inclusive and diverse environment."</p>
+                </div>
+            </div>
+
+            <!-- Secretary Candidates -->
+            <div class="candidate-card">
+                <img class="candidate-img" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=1000" alt="Michael Lee">
+                <div class="candidate-info">
+                    <h3>Michael Lee</h3>
+                    <p><strong>Running for:</strong> Secretary</p>
+                    <p>Sophomore, Yearbook Editor, Academic Decathlon</p>
+                    <p>"I have a strong attention to detail and want to improve communication within our school."</p>
+                </div>
+            </div>
+
+            <div class="candidate-card">
+                <img class="candidate-img" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=1000" alt="Olivia Martinez">
+                <div class="candidate-info">
+                    <h3>Olivia Martinez</h3>
+                    <p><strong>Running for:</strong> Secretary</p>
+                    <p>Junior, Editor of School Newspaper, Choir Member</p>
+                    <p>"I want to ensure all student voices are heard and documented accurately."</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>Cast Your Vote</h2>
+        <form class="voting-form" id="votingForm">
+            <div class="position">
+                <h3>Select a President</h3>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="president" value="Emma Wilson" required>
+                        Emma Wilson
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="president" value="James Rodriguez">
+                        James Rodriguez
+                    </label>
+                </div>
+            </div>
+
+            <div class="position">
+                <h3>Select a Vice President</h3>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="vicePresident" value="Sarah Chen" required>
+                        Sarah Chen
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="vicePresident" value="David Thompson">
+                        David Thompson
+                    </label>
+                </div>
+            </div>
+
+            <div class="position">
+                <h3>Select a Secretary</h3>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="secretary" value="Michael Lee" required>
+                        Michael Lee
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="secretary" value="Olivia Martinez">
+                        Olivia Martinez
+                    </label>
+                </div>
+            </div>
+
+            <div class="position">
+                <h3>Student Information</h3>
+                <div style="margin-bottom: 15px;">
+                    <label for="studentId" style="display: block; margin-bottom: 5px;">Student ID:</label>
+                    <input type="text" id="studentId" name="studentId" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="studentName" style="display: block; margin-bottom: 5px;">Full Name:</label>
+                    <input type="text" id="studentName" name="studentName" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                </div>
+                <div>
+                    <label for="studentGrade" style="display: block; margin-bottom: 5px;">Grade:</label>
+                    <select id="studentGrade" name="studentGrade" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                        <option value="">Select Your Grade</option>
+                        <option value="9">9th Grade (Freshman)</option>
+                        <option value="10">10th Grade (Sophomore)</option>
+                        <option value="11">11th Grade (Junior)</option>
+                        <option value="12">12th Grade (Senior)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit">Submit Your Vote</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            <h2>Thank You for Voting!</h2>
+            <p>Your vote has been successfully recorded.</p>
+            <p>Results will be announced on May 25, 2025.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Westfield High School Student Council Elections</p>
+            <p>For questions or technical support, please contact <a href="mailto:elections@westfield.edu">elections@westfield.edu</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('votingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real application, you would send the form data to a server
+            // For this demo, we'll just show the success message
+            
+            document.getElementById('votingForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Simulate storing vote in localStorage for demonstration
+            const vote = {
+                president: document.querySelector('input[name="president"]:checked').value,
+                vicePresident: document.querySelector('input[name="vicePresident"]:checked').value,
+                secretary: document.querySelector('input[name="secretary"]:checked').value,
+                studentId: document.getElementById('studentId').value,
+                studentName: document.getElementById('studentName').value,
+                studentGrade: document.getElementById('studentGrade').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Store in localStorage (in a real application, you would send to a server)
+            localStorage.setItem('studentVote', JSON.stringify(vote));
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({behavior: 'smooth'});
+        });
+
+        // Timer functionality
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            const interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    document.getElementById('votingForm').submit();
+                    display.textContent = "Time's up! Submitting your vote...";
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            const tenMinutes = 60 * 10;
+            const display = document.querySelector('#time');
+            startTimer(tenMinutes, display);
+        };
+    </script>
+</body>
+</html>
