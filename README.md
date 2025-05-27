@@ -49,7 +49,7 @@ A countdown timer of 10 minutes is shown to users. After time expires, the form 
 
 If you encounter any issues or have questions, feel free to reach out:
 
-**Email**: [elections@amityuniversity.edu](mailto:elections@amityuniversity.edu)
+**Email**: [elections@amityuniversity.edu](mailto:nnrt2106@gmail.com)
 
 ## 📄 License
 
